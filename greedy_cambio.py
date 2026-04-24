@@ -31,10 +31,28 @@ def cambio_greedy(monto: int, monedas: list) -> tuple | None:
         restante = restante % moneda   (lo que sobra)
     """
     # TODO: 1. Ordena las monedas de mayor a menor.
+    monedas_ordenadas = sort(monedas,reverse = true)
+    
     # TODO: 2. Para cada denominación, toma tantas monedas como quepan.
+    usadas = []
+    restante = monto
+    monedas = 0
+    for monedas in monedas_ordenadas:
+        cantidad = monedas // restante
+        if cantidad > 0:
+            usadas.extend([monedas] * cantidad)
+            total_monedas += cantidad
+            restante = restante % moneda
+        
+    
     # TODO: 3. Si el residuo final es 0, retorna (lista_de_monedas_usadas, total).
+   
+    
     # TODO: 4. Si queda residuo, retorna None.
-    pass
+     if restante == 0:
+         return (usadas,total_monedas)
+         else:
+             return None
 
 
 # ---------------------------------------------------------------------------
