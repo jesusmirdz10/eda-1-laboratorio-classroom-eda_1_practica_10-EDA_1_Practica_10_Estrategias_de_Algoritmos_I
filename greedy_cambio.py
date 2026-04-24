@@ -95,9 +95,25 @@ def comparar_estrategias(monto_max: int, monedas: list) -> dict:
         'montos_greedy_suboptimo' : lista de (monto, total_greedy, total_dp)
                                     donde greedy usa más monedas que DP.
     """
-    # TODO: itera los montos, llama a cambio_greedy y cambio_optimo_dp.
+     # TODO: itera los montos, llama a cambio_greedy y cambio_optimo_dp.
+    montos_greedy_falla = []
+    montos_greedy_suboptimo = []
+    for monto in range(1, monto_max + 1):
+        resultado_greedy = cambio_greedy(monto, monedas)
+        resultado_dp = cambio_optimo_dp(monto,monedas)
     # TODO: clasifica cada caso y acumula en las listas correspondientes.
-    pass
+    if resultado_dp is not None and resultado_greedy is not None:
+        montos_greedy_falla.append(monto)
+        elif resultado_greedy is not None and resultado_dp is not None:
+            total_greedy = resultado_greedy [1]
+            total_dp = resultado_dp [1]
+            if total_greedy > total_dp:
+                montos_greedy_suboptimo.append((monto, total_greedy, total_dp))
+    return {
+        'montos_greedy_falla': montos_greedy_falla,
+        'montos_greedy_suboptimo': montos_greedy_suboptimo
+        }
+    }
 
 
 # ---------------------------------------------------------------------------
